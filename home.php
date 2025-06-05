@@ -81,11 +81,12 @@ $result = $stmt->get_result();
     <?php else: ?>
         <?php while ($row = $result->fetch_assoc()): ?>
             <li>
-                <?php echo htmlspecialchars($row['playlist_name']); ?>
+                <a href="playlist_view.php?id=<?= (int)$row['playlist_id'] ?>">
+                    <?= htmlspecialchars($row['playlist_name']) ?>
+                </a>
 
-                <!-- 刪除按鈕，改用 playlist_id -->
-                <form class="delete-form" method="POST" action="delete_playlist.php" onsubmit="return confirm('確定要刪除歌單「<?php echo htmlspecialchars($row['playlist_name']); ?>」嗎？');">
-                    <input type="hidden" name="playlist_id" value="<?php echo (int)$row['playlist_id']; ?>">
+                <form class="delete-form" method="POST" action="delete_playlist.php" onsubmit="return confirm('確定要刪除歌單「<?= htmlspecialchars($row['playlist_name']) ?>」嗎？');">
+                    <input type="hidden" name="playlist_id" value="<?= (int)$row['playlist_id'] ?>">
                     <button type="submit" class="delete-btn">刪除</button>
                 </form>
             </li>

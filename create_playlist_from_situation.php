@@ -115,7 +115,12 @@ $insert_req->bind_param(
 $insert_req->execute();
 $req_id = $conn->insert_id;
 
-$playlist_name = $task . " - " . date('Y-m-d H:i:s');
+$playlist_name = trim($_POST['playlist_name'] ?? '');
+if ($playlist_name === '') {
+    set_flash_message('error', "歌單名稱不可為空", 'create_situation.php');
+    header("Location: create_situation.php");
+    exit;
+}
 $insert_playlist = $conn->prepare("INSERT INTO playlists (owner_id, playlist_name) VALUES (?, ?)");
 if (!$insert_playlist) {
     set_flash_message('error', "建立播放清單失敗：" . $conn->error, 'create_situation.php');

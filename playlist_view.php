@@ -1,14 +1,14 @@
 <?php
 session_start();
 require 'db.php';
-require 'flash.php';  // 假設你有 flash.php 來顯示訊息
+require 'flash.php';
 
 $playlist_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($playlist_id <= 0) {
     die("無效的歌單ID");
 }
 
-// 取歌單資料（連接 owner）
+// 取歌單資訊
 $sql_playlist = "
     SELECT p.playlist_name, u.username AS owner_name
     FROM playlists p
@@ -17,20 +17,19 @@ $sql_playlist = "
 ";
 $stmt = $conn->prepare($sql_playlist);
 if (!$stmt) {
-    die("SQL 錯誤");
+    die("SQL 錯誤: " . $conn->error);
 }
 $stmt->bind_param('i', $playlist_id);
 $stmt->execute();
 $result = $stmt->get_result();
-
 if ($result->num_rows === 0) {
     die("找不到此歌單");
 }
 $playlist = $result->fetch_assoc();
 
-// 取歌單裡的歌曲（含順序、歌曲名稱）
+// 取歌單裡的歌曲
 $sql_tracks = "
-    SELECT pt.order_num, tf.id AS track_id, tf.name, tf.artists
+    SELECT pt.order_num, tf.id AS track_id, tf.name AS track_name, tf.artists
     FROM playlist_tracks pt
     INNER JOIN tracks_features tf ON pt.track_id = tf.id
     WHERE pt.playlist_id = ?
@@ -38,7 +37,7 @@ $sql_tracks = "
 ";
 $stmt_tracks = $conn->prepare($sql_tracks);
 if (!$stmt_tracks) {
-    die("SQL 錯誤");
+    die("SQL 錯誤: " . $conn->error);
 }
 $stmt_tracks->bind_param('i', $playlist_id);
 $stmt_tracks->execute();
@@ -82,7 +81,7 @@ $result_tracks = $stmt_tracks->get_result();
             <?php while ($row = $result_tracks->fetch_assoc()): ?>
                 <tr>
                     <td><?= $row['order_num'] ?></td>
-                    <td><?= htmlspecialchars($row['name']) ?></td>
+                    <td><?= htmlspecialchars($row['track_name']) ?></td>
                     <td><?= htmlspecialchars($row['artists']) ?></td>
                 </tr>
             <?php endwhile; ?>
@@ -91,7 +90,7 @@ $result_tracks = $stmt_tracks->get_result();
 </table>
 
 <p><a href="create_situation.php">回到建立推薦歌單頁面</a></p>
-<p><a href="home.php">回到歌單頁面</a></p>
+<p><a href="home.php">回到歌單首頁</a></p>
 
 </body>
 </html>

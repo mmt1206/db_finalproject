@@ -23,6 +23,9 @@ require 'flash.php';
         <label for="task">任務名稱（task）：</label>
         <input id="task" type="text" name="task" required><br><br>
 
+        <label for="playlist_name">歌單名稱（playlist name）：</label>
+        <input id="playlist_name" type="text" name="playlist_name" required><br><br>
+
         <label for="duration">最大播放時間（秒）：</label>
         <input id="duration" type="number" name="duration" min="17" max="2458">
         <span class="range-note">(範圍：約 17 ~ 2458 秒)</span><br><br>
