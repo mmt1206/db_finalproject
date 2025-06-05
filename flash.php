@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 function set_flash_message(string $type, string $message, string $page_name) {
     $_SESSION['flash_message'] = [

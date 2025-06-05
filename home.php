@@ -70,6 +70,12 @@ $result = $stmt->get_result();
         <a href="settings.php">個人設定</a>
         <a href="create_situation.php">建立推薦歌單</a>
         <a href="show_req_situation.php">顯示情境</a>
+        <?php if (isManager($user)): ?>
+            <a href="user_list.php">使用者管理</a>
+        <?php endif; ?>
+        <form action="logout.php" method="POST" style="display:inline;">
+            <button type="submit">登出</button>
+        </form>
     </nav>
 
     <?php display_flash_message(); ?>

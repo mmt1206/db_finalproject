@@ -24,4 +24,17 @@ function getCurrentUser() {
     $result = $stmt->get_result();
     return $result->fetch_assoc();
 }
+
+function isManager($user) {
+    return $user['user_type'] === 'manager';
+}
+
+function isCreator($user) {
+    return $user['user_type'] === 'creator';
+}
+
+function isListener($user) {
+    return $user['user_type'] === 'listener';
+}
 ?>
+

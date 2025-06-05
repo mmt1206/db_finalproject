@@ -1,5 +1,6 @@
 <?php
 require 'db.php';
+session_start();  // ⬅️ 一定要加這行
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
