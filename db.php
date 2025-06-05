@@ -4,7 +4,7 @@ session_start();
 $host = 'localhost';
 $user = 'root';
 $pass = '';
-$dbname = 'final_project';
+$dbname = 'test';
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
