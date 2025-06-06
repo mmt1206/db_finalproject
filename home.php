@@ -62,6 +62,19 @@ $result = $stmt->get_result();
             color: red;
         }
     </style>
+        <form action="logout.php" method="POST" style="display:inline;">
+            <button type="submit"style="
+                position: absolute; right: 20px; top: 10px;
+                font-size: 1.15em; /* Slightly smaller than links but still larger */
+                padding: 8px 15px;
+                background-color: #4CAF50; /* A green color for the button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            ">登出</button>
+        </form>
 </head>
 <body>
     <h1>歡迎，<?php echo htmlspecialchars($user['username']); ?>！</h1>
@@ -131,18 +144,6 @@ $result = $stmt->get_result();
             transition: background-color 0.3s ease;
         ">使用者管理</a>
         <?php endif; ?>
-        <form action="logout.php" method="POST" style="display:inline;">
-            <button type="submit"style="
-                font-size: 1.15em; /* Slightly smaller than links but still larger */
-                padding: 8px 15px;
-                background-color: #4CAF50; /* A green color for the button */
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            ">登出</button>
-        </form>
     </nav>
 
     <?php display_flash_message(); ?>
