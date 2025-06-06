@@ -8,17 +8,21 @@ if (!$user) {
     exit();
 }
 
-// ✅ 點讚邏輯
+// ✅ 點讚邏輯（保留 tab）
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['like_post_id'])) {
     $post_id = (int)$_POST['like_post_id'];
     $like_stmt = $conn->prepare("UPDATE post SET liked_num = liked_num + 1 WHERE post_id = ?");
     $like_stmt->bind_param("i", $post_id);
     $like_stmt->execute();
-    header("Location: post.php");
+
+    $tab = $_POST['current_tab'] ?? 'hot';
+    header("Location: post.php?tab=" . urlencode($tab));
     exit();
 }
 
-// ✅ 取得前三篇按讚數最高的貼文
+$active_tab = $_GET['tab'] ?? 'hot';
+
+// ✅ 取得熱門貼文
 $top_stmt = $conn->prepare("
     SELECT p.post_id, p.content, p.liked_num, p.post_date, u.username
     FROM post p
@@ -33,7 +37,7 @@ while ($row = $top_result->fetch_assoc()) {
     $top_posts[] = $row;
 }
 
-// ✅ 取得所有貼文（不排除熱門前三名）
+// ✅ 取得所有貼文
 $all_stmt = $conn->prepare("
     SELECT p.post_id, p.content, p.liked_num, p.post_date, u.username
     FROM post p
@@ -53,6 +57,18 @@ $other_result = $all_stmt->get_result();
         body {
             font-family: "Noto Sans TC", sans-serif;
             margin: 20px;
+        }
+        .tab-bar button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            background-color: #eee;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        .tab-bar .active {
+            background-color:  #28a745;
+            color: black;
         }
         .post {
             border: 1px solid #ccc;
@@ -94,78 +110,111 @@ $other_result = $all_stmt->get_result();
             background-color: #c9302c;
         }
         h2 {
-            margin-top: 40px;
+            margin-top: 30px;
         }
     </style>
+
+        <form action="home.php">
+        <button type="submit"style="
+                position: absolute; right: 20px; top: 10px;
+                font-size: 1.15em; /* Slightly smaller than links but still larger */
+                padding: 8px 15px;
+                background-color:rgb(178, 183, 178); /* A green color for the button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;"
+                >返回主頁</button>
+    </form>
 </head>
 <body>
     <h1>貼文牆</h1>
 
     <a href="create_post.php"><button>建立貼文</button></a>
-    <nav><a href="home.php">回首頁</a></nav>
 
     <?php display_flash_message(); ?>
 
+    <!-- 🔁 分頁切換按鈕 -->
+    <div class="tab-bar">
+        <button onclick="switchTab('hot')" class="<?= $active_tab === 'hot' ? 'active' : '' ?>">🔥 熱門貼文</button>
+        <button onclick="switchTab('all')" class="<?= $active_tab === 'all' ? 'active' : '' ?>">📝 所有貼文</button>
+    </div>
+
     <!-- 🔥 熱門貼文區塊 -->
-    <h2>🔥 熱門貼文</h2>
-    <?php if (empty($top_posts)): ?>
-        <p>目前沒有熱門貼文。</p>
-    <?php else: ?>
-        <?php foreach ($top_posts as $row): ?>
-            <div class="post">
-                <div class="post-header">
-                    <?= htmlspecialchars($row['username']) ?>
-                    <span class="post-date">(<?= htmlspecialchars($row['post_date']) ?>)</span>
-                </div>
-                <div class="post-content">
-                    <?= nl2br(htmlspecialchars($row['content'])) ?>
-                </div>
-                <div class="post-likes">
-                    按讚數: <?= (int)$row['liked_num'] ?>
-                    <form method="POST" class="like-form">
-                        <input type="hidden" name="like_post_id" value="<?= (int)$row['post_id'] ?>">
-                        <button type="submit" class="like-btn" title="按讚">👍</button>
-                    </form>
-                    <?php if (isManager($user)): ?>
-                        <form method="POST" action="delete_post.php" onsubmit="return confirm('確定要刪除這篇貼文嗎？');" class="delete-form">
-                            <input type="hidden" name="post_id" value="<?= (int)$row['post_id'] ?>">
-                            <button type="submit" class="delete-btn">刪除貼文</button>
+    <div id="hot-posts" style="<?= $active_tab === 'hot' ? '' : 'display:none;' ?>">
+        <?php if (empty($top_posts)): ?>
+            <p>目前沒有熱門貼文。</p>
+        <?php else: ?>
+            <?php foreach ($top_posts as $row): ?>
+                <div class="post">
+                    <div class="post-header">
+                        <?= htmlspecialchars($row['username']) ?>
+                        <span class="post-date">(<?= htmlspecialchars($row['post_date']) ?>)</span>
+                    </div>
+                    <div class="post-content">
+                        <?= nl2br(htmlspecialchars($row['content'])) ?>
+                    </div>
+                    <div class="post-likes">
+                        按讚數: <?= (int)$row['liked_num'] ?>
+                        <form method="POST" class="like-form">
+                            <input type="hidden" name="like_post_id" value="<?= (int)$row['post_id'] ?>">
+                            <input type="hidden" name="current_tab" value="hot">
+                            <button type="submit" class="like-btn" title="按讚">👍</button>
                         </form>
-                    <?php endif; ?>
+                        <?php if (isManager($user)): ?>
+                            <form method="POST" action="delete_post.php" onsubmit="return confirm('確定要刪除這篇貼文嗎？');" class="delete-form">
+                                <input type="hidden" name="post_id" value="<?= (int)$row['post_id'] ?>">
+                                <input type="hidden" name="current_tab" value="hot">
+                                <button type="submit" class="delete-btn">刪除貼文</button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
 
     <!-- 📝 所有貼文區塊 -->
-    <h2>📝 所有貼文</h2>
-    <?php if ($other_result === null || $other_result->num_rows === 0): ?>
-        <p>沒有貼文。</p>
-    <?php else: ?>
-        <?php while ($row = $other_result->fetch_assoc()): ?>
-            <div class="post">
-                <div class="post-header">
-                    <?= htmlspecialchars($row['username']) ?>
-                    <span class="post-date">(<?= htmlspecialchars($row['post_date']) ?>)</span>
-                </div>
-                <div class="post-content">
-                    <?= nl2br(htmlspecialchars($row['content'])) ?>
-                </div>
-                <div class="post-likes">
-                    按讚數: <?= (int)$row['liked_num'] ?>
-                    <form method="POST" class="like-form">
-                        <input type="hidden" name="like_post_id" value="<?= (int)$row['post_id'] ?>">
-                        <button type="submit" class="like-btn" title="按讚">👍</button>
-                    </form>
-                    <?php if (isManager($user)): ?>
-                        <form method="POST" action="delete_post.php" onsubmit="return confirm('確定要刪除這篇貼文嗎？');" class="delete-form">
-                            <input type="hidden" name="post_id" value="<?= (int)$row['post_id'] ?>">
-                            <button type="submit" class="delete-btn">刪除貼文</button>
+    <div id="all-posts" style="<?= $active_tab === 'all' ? '' : 'display:none;' ?>">
+        <?php if ($other_result === null || $other_result->num_rows === 0): ?>
+            <p>沒有貼文。</p>
+        <?php else: ?>
+            <?php while ($row = $other_result->fetch_assoc()): ?>
+                <div class="post">
+                    <div class="post-header">
+                        <?= htmlspecialchars($row['username']) ?>
+                        <span class="post-date">(<?= htmlspecialchars($row['post_date']) ?>)</span>
+                    </div>
+                    <div class="post-content">
+                        <?= nl2br(htmlspecialchars($row['content'])) ?>
+                    </div>
+                    <div class="post-likes">
+                        按讚數: <?= (int)$row['liked_num'] ?>
+                        <form method="POST" class="like-form">
+                            <input type="hidden" name="like_post_id" value="<?= (int)$row['post_id'] ?>">
+                            <input type="hidden" name="current_tab" value="all">
+                            <button type="submit" class="like-btn" title="按讚">👍</button>
                         </form>
-                    <?php endif; ?>
+                        <?php if (isManager($user)): ?>
+                            <form method="POST" action="delete_post.php" onsubmit="return confirm('確定要刪除這篇貼文嗎？');" class="delete-form">
+                                <input type="hidden" name="post_id" value="<?= (int)$row['post_id'] ?>">
+                                <input type="hidden" name="current_tab" value="all">
+                                <button type="submit" class="delete-btn">刪除貼文</button>
+                            </form>
+                        <?php endif; ?>
+                    </div>
                 </div>
-            </div>
-        <?php endwhile; ?>
-    <?php endif; ?>
+            <?php endwhile; ?>
+        <?php endif; ?>
+    </div>
+
+    <script>
+    function switchTab(tab) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('tab', tab);
+        window.location.href = url.toString();
+    }
+    </script>
 </body>
 </html>
