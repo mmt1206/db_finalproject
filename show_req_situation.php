@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'db.php';
 require 'flash.php'; // 加入 flash 功能
 

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require 'db.php';
 require 'flash.php';  // 確保載入 flash 函式
 

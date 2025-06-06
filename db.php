@@ -1,5 +1,5 @@
 <?php
-session_start();
+require 'flash.php';
 
 $host = 'localhost';
 $user = 'root';
