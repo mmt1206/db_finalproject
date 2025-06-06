@@ -38,31 +38,120 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             font-family: "Noto Sans TC", sans-serif;
-            margin: 20px;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(255, 252, 252, 0.08);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px 40px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
         textarea {
             width: 100%;
-            height: 100px;
-            font-size: 1em;
+            height: 200px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            resize: vertical;
         }
-        button {
+
+        button, input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .secondary-button {
+            background-color: #6c757d;
             margin-top: 10px;
-            padding: 8px 16px;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color:white;
+            background-color: #6c757d;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: none;
+        }
+
+        .message {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>建立貼文</h1>
-    <nav>
-        <a href="post.php">← 回貼文牆</a>
-    </nav>
+    <div class="card">
+        <h1>建立貼文</h1>
 
-    <?php display_flash_message(); ?>
+        <?php display_flash_message(); ?>
 
-    <form method="POST">
-        <label for="content">貼文內容：</label><br>
-        <textarea name="content" id="content" required></textarea><br>
-        <button type="submit">發佈</button>
-    </form>
+        <form method="POST">
+            <div class="form-group">
+                <label for="content">貼文內容：</label>
+                <textarea name="content" id="content" required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">發佈</button>
+        </form>
+                <form action="post.php">
+            <button href="post.php" class="back-link">🔙 返回貼文牆</button>
+        </form>
+    </div>
 </body>
 </html>
