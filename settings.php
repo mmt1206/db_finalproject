@@ -98,6 +98,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 15px;
             font-weight: bold;
         }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color:white;
+            background-color: #6c757d;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: none;
+        }
         .success { color: green; }
         .error { color: red; }
         .home-link {
@@ -150,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <form action="home.php">
-            <button type="submit" class="secondary-button">🔙 返回主頁</button>
+            <button type="submit" class="back-link">🔙 返回主頁</button>
         </form>
     </div>
 </body>
