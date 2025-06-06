@@ -61,8 +61,84 @@ $result = $stmt->get_result();
         .message.error {
             color: red;
         }
+
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            }
+
+        .playlist-card {
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .playlist-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .playlist-link {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+        }
+
+        .playlist-link:hover {
+            color: #007BFF;
+        }
+
+        .delete-form {
+            margin-top: auto;
+        }
+
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #e60000;
+        }
+
+        .playlist-card.empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: #777;
+        }
+
     </style>
+     <form action="logout.php" method="POST" style="display:inline;">
+            <button type="submit"style="
+                position: absolute; right: 20px; top: 10px;
+                font-size: 1.15em; /* Slightly smaller than links but still larger */
+                padding: 8px 15px;
+                background-color: #4CAF50; /* A green color for the button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            ">登出</button>
+    </form>
 </head>
+
+
 <body>
     <h1>歡迎，<?php echo htmlspecialchars($user['username']); ?>！</h1>
     <nav>
@@ -131,30 +207,20 @@ $result = $stmt->get_result();
             transition: background-color 0.3s ease;
         ">使用者管理</a>
         <?php endif; ?>
-        <form action="logout.php" method="POST" style="display:inline;">
-            <button type="submit"style="
-                font-size: 1.15em; /* Slightly smaller than links but still larger */
-                padding: 8px 15px;
-                background-color: #4CAF50; /* A green color for the button */
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            ">登出</button>
-        </form>
     </nav>
 
     <?php display_flash_message(); ?>
 
     <h2>你的歌單</h2>
-    <ul>
+    
+    <div class = "playlist-grid">
     <?php if ($result->num_rows === 0): ?>
-        <li>目前沒有歌單資料</li>
+        <div class = "playlist-card empty">目前沒有歌單資料<div>
     <?php else: ?>
         <?php while ($row = $result->fetch_assoc()): ?>
-            <li>
-                <a href="playlist_view.php?id=<?= (int)$row['playlist_id'] ?>">
+            <div class = "playlist-card">
+
+            <a class = "playlist-link" href="playlist_view.php?id=<?= (int)$row['playlist_id'] ?>">
                     <?= htmlspecialchars($row['playlist_name']) ?>
                 </a>
 
@@ -162,9 +228,9 @@ $result = $stmt->get_result();
                     <input type="hidden" name="playlist_id" value="<?= (int)$row['playlist_id'] ?>">
                     <button type="submit" class="delete-btn">刪除</button>
                 </form>
-            </li>
+        </div>
         <?php endwhile; ?>
     <?php endif; ?>
-    </ul>
+        </div>
 </body>
 </html>
