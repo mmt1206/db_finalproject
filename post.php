@@ -28,32 +28,20 @@ $top_stmt = $conn->prepare("
 ");
 $top_stmt->execute();
 $top_result = $top_stmt->get_result();
-$top_ids = [];
+$top_posts = [];
 while ($row = $top_result->fetch_assoc()) {
     $top_posts[] = $row;
-    $top_ids[] = (int)$row['post_id'];
 }
 
-// ✅ 取得其餘貼文（排除前三名）
-if (!empty($top_ids)) {
-    $placeholders = implode(',', array_fill(0, count($top_ids), '?'));
-    $types = str_repeat('i', count($top_ids));
-    $sql = "
-        SELECT p.post_id, p.content, p.liked_num, p.post_date, u.username
-        FROM post p
-        JOIN users u ON p.post_person = u.user_id
-        WHERE p.post_id NOT IN ($placeholders)
-        ORDER BY p.post_id DESC
-    ";
-    $other_stmt = $conn->prepare($sql);
-    $other_stmt->bind_param($types, ...$top_ids);
-    $other_stmt->execute();
-    $other_result = $other_stmt->get_result();
-} else {
-    // 若目前沒有貼文，建立空的結果
-    $top_posts = [];
-    $other_result = null;
-}
+// ✅ 取得所有貼文（不排除熱門前三名）
+$all_stmt = $conn->prepare("
+    SELECT p.post_id, p.content, p.liked_num, p.post_date, u.username
+    FROM post p
+    JOIN users u ON p.post_person = u.user_id
+    ORDER BY p.post_id DESC
+");
+$all_stmt->execute();
+$other_result = $all_stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -149,10 +137,10 @@ if (!empty($top_ids)) {
         <?php endforeach; ?>
     <?php endif; ?>
 
-    <!-- 📝 其他貼文區塊 -->
+    <!-- 📝 所有貼文區塊 -->
     <h2>📝 所有貼文</h2>
     <?php if ($other_result === null || $other_result->num_rows === 0): ?>
-        <p>沒有其他貼文。</p>
+        <p>沒有貼文。</p>
     <?php else: ?>
         <?php while ($row = $other_result->fetch_assoc()): ?>
             <div class="post">
