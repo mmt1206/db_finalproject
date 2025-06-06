@@ -123,17 +123,21 @@ $result = $stmt->get_result();
         }
 
     </style>
-     <form action="logout.php" method="POST" style="display:inline;">
-            <button type="submit"style="
-                position: absolute; right: 20px; top: 31px;"
-            >登出</button>
-    </form>
+     
 </head>
 
 
 <body>
+    
     <h1>歡迎，<?php echo htmlspecialchars($user['username']); ?>！</h1>
-    <nav style="
+   
+    <form action="logout.php" method="POST" style="display:inline;">
+            <button type="submit"style="
+                position: absolute; right: 20px; top: 31px;"
+            >登出</button>
+    </form>
+   
+   <nav style="
         display: flex; 
         justify-content:  space-evenly;; 
         align-items: center; /* Aligns items vertically in the center */
