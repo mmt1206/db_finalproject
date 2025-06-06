@@ -66,16 +66,82 @@ $result = $stmt->get_result();
 <body>
     <h1>歡迎，<?php echo htmlspecialchars($user['username']); ?>！</h1>
     <nav>
-        <a href="home.php">歌單首頁</a>
-        <a href="settings.php">個人設定</a>
-        <a href="create_situation.php">建立推薦歌單</a>
-        <a href="show_req_situation.php">顯示情境</a>
-        <a href="post.php">貼文牆</a>
+        <nav style="
+        display: flex; 
+        justify-content:  space-evenly;; 
+        align-items: center; /* Aligns items vertically in the center */
+        background-color: #80EF80;
+        padding: 15px 10px; /* Added some padding for better spacing */
+        border-radius: 8px; /* Added rounded corners */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added a subtle shadow */
+    ">
+        <a href="home.php"style="
+            font-size: 1.25em; /* Increased font size */
+            margin-right: 15px; /* Added margin between links */
+            color: #333; /* Darker text color for better readability on yellow */
+            text-decoration: none; /* Remove underline from links */
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        ">歌單首頁</a>
+        <a href="settings.php"style="
+            font-size: 1.25em;
+            margin-right: 15px;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        ">個人設定</a>
+        <a href="create_situation.php"style="
+            font-size: 1.25em;
+            margin-right: 15px;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        ">建立推薦歌單</a>
+        <a href="show_req_situation.php"style="
+            font-size: 1.25em;
+            margin-right: 15px;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        ">顯示情境</a>
+        <a href="post.php"style="
+            font-size: 1.25em;
+            margin-right: 15px;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        ">貼文牆</a>
         <?php if (isManager($user)): ?>
-            <a href="user_list.php">使用者管理</a>
+            <a href="user_list.php"style="
+            font-size: 1.25em;
+            margin-right: 15px;
+            color: #333;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        ">使用者管理</a>
         <?php endif; ?>
         <form action="logout.php" method="POST" style="display:inline;">
-            <button type="submit">登出</button>
+            <button type="submit"style="
+                font-size: 1.15em; /* Slightly smaller than links but still larger */
+                padding: 8px 15px;
+                background-color: #4CAF50; /* A green color for the button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            ">登出</button>
         </form>
     </nav>
 
