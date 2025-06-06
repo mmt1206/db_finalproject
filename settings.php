@@ -90,6 +90,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         button:hover {
             background-color: #218838;
         }
+        .secondary-button {
+            background-color: #6c757d;
+            margin-top: 10px;
+        }
         .message {
             margin-bottom: 15px;
             font-weight: bold;
@@ -107,9 +111,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="card">
         <h1>👤 個人設定 - <?= htmlspecialchars($user['username']) ?></h1>
-        <nav>
-            <a href="home.php" class="home-link">🏠 返回首頁</a>
-        </nav>
 
         <?php if ($msg !== ''): ?>
             <p class="message <?= strpos($msg, '成功') !== false ? 'success' : 'error' ?>">
@@ -146,6 +147,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </label>
 
             <button type="submit">💾 儲存</button>
+        </form>
+
+        <form action="home.php">
+            <button type="submit" class="secondary-button">🔙 返回主頁</button>
         </form>
     </div>
 </body>
