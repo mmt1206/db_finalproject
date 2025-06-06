@@ -13,7 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $birth_date = $_POST['birth_date'] ?? null;
     $gender = $_POST['gender'] ?? null;
-    $user_type = $_POST['user_type'] ?? null;
+    
+    // 如果目前使用者是 manager，才更新 user_type，否則保持原本的 user_type
+    if ($user['user_type'] === 'manager') {
+        $user_type = $_POST['user_type'] ?? null;
+    } else {
+        $user_type = $user['user_type']; // 不允許修改
+    }
 
     // 簡單驗證（可以擴充）
     if ($username === '') {
@@ -82,11 +88,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <label>
             使用者類型：
-            <select name="user_type">
-                <option value="listener" <?= $user['user_type'] === 'listener' ? 'selected' : '' ?>>聽眾</option>
-                <option value="creator" <?= $user['user_type'] === 'creator' ? 'selected' : '' ?>>創作者</option>
-                <option value="manager" <?= $user['user_type'] === 'manager' ? 'selected' : '' ?>>管理員</option>
-            </select>
+            <?php if ($user['user_type'] === 'manager'): ?>
+                <select name="user_type">
+                    <option value="listener" <?= $user['user_type'] === 'listener' ? 'selected' : '' ?>>聽眾</option>
+                    <option value="creator" <?= $user['user_type'] === 'creator' ? 'selected' : '' ?>>創作者</option>
+                    <option value="manager" <?= $user['user_type'] === 'manager' ? 'selected' : '' ?>>管理員</option>
+                </select>
+            <?php else: ?>
+                <input type="text" value="<?= htmlspecialchars($user['user_type']) ?>" disabled>
+                <input type="hidden" name="user_type" value="<?= htmlspecialchars($user['user_type']) ?>">
+            <?php endif; ?>
         </label>
 
         <button type="submit">儲存</button>
