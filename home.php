@@ -125,28 +125,19 @@ $result = $stmt->get_result();
     </style>
      <form action="logout.php" method="POST" style="display:inline;">
             <button type="submit"style="
-                position: absolute; right: 20px; top: 10px;
-                font-size: 1.15em; /* Slightly smaller than links but still larger */
-                padding: 8px 15px;
-                background-color: #4CAF50; /* A green color for the button */
-                color: white;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            ">登出</button>
+                position: absolute; right: 20px; top: 31px;"
+            >登出</button>
     </form>
 </head>
 
 
 <body>
     <h1>歡迎，<?php echo htmlspecialchars($user['username']); ?>！</h1>
-    <nav>
-        <nav style="
+    <nav style="
         display: flex; 
         justify-content:  space-evenly;; 
         align-items: center; /* Aligns items vertically in the center */
-        background-color: #80EF80;
+        background-color: #4CAF50;
         padding: 15px 10px; /* Added some padding for better spacing */
         border-radius: 8px; /* Added rounded corners */
         box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added a subtle shadow */
@@ -215,7 +206,7 @@ $result = $stmt->get_result();
     
     <div class = "playlist-grid">
     <?php if ($result->num_rows === 0): ?>
-        <div class = "playlist-card empty">目前沒有歌單資料<div>
+        <div class = "playlist-card empty">目前沒有歌單資料</div>
     <?php else: ?>
         <?php while ($row = $result->fetch_assoc()): ?>
             <div class = "playlist-card">
