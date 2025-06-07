@@ -108,11 +108,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         input[type="text"],
         input[type="date"],
         select {
-            width: 100%;
+            width: 96%;
             padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 8px;
+        }
+        select {
+            height: 42px; /* match input height */
+            width: 100%;
+            background-color: white; /* optional: make it look consistent */
         }
 
         .btn-submit {
@@ -199,13 +204,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn-submit">新增帳號</button>
         </form>
         
-        <from action = "home.php">
+        <form action = "home.php">
             <button type="submit" class="btn-home">🔙 返回主頁</button>
-        </from>
+        </form>
         
-        <from action = "user_list.php">
+        <form action = "user_list.php">
              <button type="user_list.php" class="btn-home">使用者管理</button>
-        </from>
+        </form>
         
         
     </div>
