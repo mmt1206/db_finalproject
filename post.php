@@ -65,6 +65,7 @@ $other_result = $all_stmt->get_result();
             background-color: #eee;
             cursor: pointer;
             margin-right: 5px;
+            border-radius: 5px;
         }
         .tab-bar .active {
             background-color:  #28a745;
