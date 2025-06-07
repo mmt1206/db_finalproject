@@ -64,6 +64,32 @@ $result_tracks = $stmt_tracks->get_result();
 <?php display_flash_message(); ?>
 
 <h1>歌單：<?= htmlspecialchars($playlist['playlist_name']) ?></h1>
+<nav>
+    <a href="home.php"style="
+            position: absolute; right: 20px; top: 23px;
+            font-size: 1.15em; /* Slightly smaller than links but still larger */
+            padding: 8px 15px;
+            background-color:rgb(178, 183, 178); /* A green color for the button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;">
+            返回首頁</a>
+    <a href="create_situation.php"style="
+            position: absolute; right: 128px; top: 23px;
+            font-size: 1.15em; /* Slightly smaller than links but still larger */
+            padding: 8px 15px;
+            background-color:rgb(178, 183, 178); /* A green color for the button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;">回到建立推薦歌單頁面</a>
+    </nav>
+
 <p>擁有者：<?= htmlspecialchars($playlist['owner_name']) ?></p>
 
 <table>
@@ -89,8 +115,7 @@ $result_tracks = $stmt_tracks->get_result();
     </tbody>
 </table>
 
-<p><a href="create_situation.php">回到建立推薦歌單頁面</a></p>
-<p><a href="home.php">回到歌單首頁</a></p>
+
 
 </body>
 </html>
