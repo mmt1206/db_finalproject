@@ -93,13 +93,33 @@ $result = $conn->query("SELECT user_id, username, birth_date, gender, user_type 
             text-decoration: none;
             color: #337ab7;
         }
+        
     </style>
 </head>
 <body>
     <h1>使用者管理</h1>
     <nav>
-        <a href="home.php">返回首頁</a>
-        <a href="register.php">新增帳號</a>
+        <a href="home.php"style="
+                position: absolute; right: 20px; top: 23px;
+                font-size: 1.15em; /* Slightly smaller than links but still larger */
+                padding: 8px 15px;
+                background-color:rgb(178, 183, 178); /* A green color for the button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;"
+                >返回首頁</a>
+        <a href="register.php"style="
+                position: absolute; right: 128px; top: 23px;
+                font-size: 1.15em; /* Slightly smaller than links but still larger */
+                padding: 8px 15px;
+                background-color: #4CAF50; /* A green color for the button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;">新增帳號</a>
     </nav>
 
     <?php display_flash_message(); ?>
