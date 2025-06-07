@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: user_list.php');
         exit();
     } else {
-        // 若有錯誤，也用 flash 顯示並停留本頁
         $error_msg = implode('；', $errors);
         set_flash_message('error', $error_msg, 'register.php');
         header('Location: register.php');
@@ -61,67 +60,155 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             font-family: "Noto Sans TC", sans-serif;
-            margin: 20px;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
         }
-        form {
-            max-width: 400px;
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px 40px;
         }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #6f42c1;
+            margin-right: 12px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
         label {
             display: block;
-            margin-top: 10px;
+            margin-bottom: 8px;
+            font-weight: bold;
         }
-        input, select {
+
+        input[type="text"],
+        input[type="date"],
+        select {
             width: 100%;
-            padding: 5px;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
         }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+
         .message.success {
             color: green;
         }
+
         .message.error {
             color: red;
         }
-        nav a {
-            margin-right: 10px;
-            text-decoration: none;
-            color: #337ab7;
+
+        .btn-home {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #6c757d;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top : 3px;
         }
+
+        .btn-home:hover {
+            background-color: #5a6268;
+        }
+        
+        
     </style>
 </head>
 <body>
-    <h1>新增使用者帳號</h1>
-    <nav>
-        <a href="home.php">首頁</a>
-        <a href="user_list.php">使用者管理</a>
-    </nav>
+    <div class="card">
+        <h1>新增使用者帳號</h1>
 
-    <?php display_flash_message(); ?>
+        <?php display_flash_message(); ?>
 
-    <form method="POST" action="register.php">
-        <label>使用者名稱：
-            <input type="text" name="username" required>
-        </label>
+        <form method="POST" action="register.php">
+            <div class="form-group">
+                <label>使用者名稱：</label>
+                <input type="text" name="username" required>
+            </div>
 
-        <label>生日：
-            <input type="date" name="birth_date" required>
-        </label>
+            <div class="form-group">
+                <label>生日：</label>
+                <input type="date" name="birth_date" required>
+            </div>
 
-        <label>性別：
-            <select name="gender" required>
-                <option value="male">男</option>
-                <option value="female">女</option>
-                <option value="other">其他</option>
-            </select>
-        </label>
+            <div class="form-group">
+                <label>性別：</label>
+                <select name="gender" required>
+                    <option value="male">男</option>
+                    <option value="female">女</option>
+                    <option value="other">其他</option>
+                </select>
+            </div>
 
-        <label>角色：
-            <select name="user_type" required>
-                <option value="listener">聽眾</option>
-                <option value="creator">創作者</option>
-                <option value="manager">管理者</option>
-            </select>
-        </label>
+            <div class="form-group">
+                <label>角色：</label>
+                <select name="user_type" required>
+                    <option value="listener">聽眾</option>
+                    <option value="creator">創作者</option>
+                    <option value="manager">管理者</option>
+                </select>
+            </div>
 
-        <button type="submit">新增帳號</button>
-    </form>
+            <button type="submit" class="btn-submit">新增帳號</button>
+        </form>
+        
+        <from action = "home.php">
+            <button type="submit" class="btn-home">🔙 返回主頁</button>
+        </from>
+        
+        <from action = "user_list.php">
+             <button type="user_list.php" class="btn-home">使用者管理</button>
+        </from>
+        
+        
+    </div>
+    
 </body>
 </html>
