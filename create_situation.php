@@ -188,7 +188,7 @@ require 'flash.php';
             <input type="submit" value="✅ 建立播放清單">
         </form>
 
-        <form action="home.php">
+        <form action="index.php">
             <button type="submit" class="secondary-button">🔙 返回主頁</button>
         </form>
     </div>

@@ -99,7 +99,7 @@ $result = $conn->query("SELECT user_id, username, birth_date, gender, user_type 
 <body>
     <h1>使用者管理</h1>
     <nav>
-        <a href="home.php"style="
+        <a href="index.php"style="
                 position: absolute; right: 20px; top: 23px;
                 font-size: 1.15em; /* Slightly smaller than links but still larger */
                 padding: 8px 15px;

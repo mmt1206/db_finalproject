@@ -74,7 +74,7 @@ $result = $stmt->get_result();
 
 
     </style>
-    <form action="home.php">
+    <form action="index.php">
         <button type="submit"style="
                 position: absolute; right: 20px; top: 10px;
                 font-size: 1.15em; /* Slightly smaller than links but still larger */

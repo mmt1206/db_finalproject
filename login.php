@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->get_result();
     if ($row = $result->fetch_assoc()) {
         $_SESSION['user_id'] = $row['user_id'];
-        header('Location: home.php');
+        header('Location: index.php');
         exit();
     } else {
         $error = "找不到使用者";

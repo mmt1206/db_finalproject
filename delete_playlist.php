@@ -11,7 +11,7 @@ if (!$user) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($_POST['playlist_id'])) {
         $_SESSION['error'] = '未指定要刪除的歌單';
-        header('Location: home.php');
+        header('Location: index.php');
         exit();
     }
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt->close();
 
-    header('Location: home.php');
+    header('Location: index.php');
     exit();
 } else {
     header('HTTP/1.1 405 Method Not Allowed');

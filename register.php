@@ -204,8 +204,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="btn-submit">新增帳號</button>
         </form>
         
-        <form action = "home.php">
-            <button type="home.php" class="btn-home">🔙 返回主頁</button>
+        <form action = "index.php">
+            <button type="index.php" class="btn-home">🔙 返回主頁</button>
         </form>
         
         <form action = "user_list.php">

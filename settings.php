@@ -172,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit">💾 儲存</button>
         </form>
 
-        <form action="home.php">
+        <form action="index.php">
             <button type="submit" class="back-link">🔙 返回主頁</button>
         </form>
     </div>

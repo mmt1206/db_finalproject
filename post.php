@@ -135,7 +135,7 @@ $other_result = $all_stmt->get_result();
 </head>
 <body>
    <nav>
-        <a href="home.php"style="
+        <a href="index.php"style="
                 position: absolute; right: 20px; top: 23px;
                 font-size: 1.15em; /* Slightly smaller than links but still larger */
                 padding: 8px 15px;
