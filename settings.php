@@ -69,11 +69,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: 500;
         }
         input[type="text"], input[type="date"], select {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 1em;
+        }
+        select {
+            height: 42px; /* match input height */
+            width: 100%;
+            background-color: white; /* optional: make it look consistent */
         }
         button {
             background-color: #28a745;

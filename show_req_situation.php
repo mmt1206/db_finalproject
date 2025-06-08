@@ -22,7 +22,7 @@ $result = $stmt->get_result();
     <meta charset="UTF-8" />
     <title>我的情境列表</title>
     <style>
-        body { font-family: "Noto Sans TC", sans-serif; margin: 20px; }
+        body { font-family: "Noto Sans TC", sans-serif; margin: 23px; }
         ul { list-style-type: none; padding-left: 0; }
         li { margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
         form.delete-form { display: inline; }

@@ -38,11 +38,16 @@ require 'flash.php';
             display: block;
         }
         input[type="text"], input[type="number"], select {
-            width: 100%;
+            width: 97%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 1em;
+        }
+        select {
+            height: 42px; /* match input height */
+            width: 100%;
+            background-color: white; /* optional: make it look consistent */
         }
         .range-group {
             display: flex;

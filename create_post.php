@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         textarea {
-            width: 100%;
+            width: 95%;
             height: 200px;
             padding: 12px;
             font-size: 16px;

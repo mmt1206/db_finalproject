@@ -108,11 +108,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         input[type="text"],
         input[type="date"],
         select {
-            width: 100%;
+            width: 96%;
             padding: 12px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 8px;
+        }
+         select {
+            height: 42px; /* match input height */
+            width: 100%;
+            background-color: white; /* optional: make it look consistent */
         }
 
         .btn-submit {
@@ -139,16 +144,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .message.error {
             color: red;
         }
+
+        .btn-home {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #6c757d;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top : 3px;
+        }
+
+        .btn-home:hover {
+            background-color: #5a6268;
+        }
+        
+        
     </style>
 </head>
 <body>
     <div class="card">
         <h1>新增使用者帳號</h1>
-
-        <nav>
-            <a href="home.php">首頁</a>
-            <a href="user_list.php">使用者管理</a>
-        </nav>
 
         <?php display_flash_message(); ?>
 
@@ -183,6 +203,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <button type="submit" class="btn-submit">新增帳號</button>
         </form>
+        
+        <form action = "home.php">
+            <button type="home.php" class="btn-home">🔙 返回主頁</button>
+        </form>
+        
+        <form action = "user_list.php">
+             <button type="user_list.php" class="btn-home">使用者管理</button>
+        </form>
+        
+        
     </div>
+    
 </body>
 </html>

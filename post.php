@@ -65,6 +65,7 @@ $other_result = $all_stmt->get_result();
             background-color: #eee;
             cursor: pointer;
             margin-right: 5px;
+            border-radius: 5px;
         }
         .tab-bar .active {
             background-color:  #28a745;
@@ -112,11 +113,30 @@ $other_result = $all_stmt->get_result();
         h2 {
             margin-top: 30px;
         }
+        .nav-button {
+            position: absolute;
+            font-size: 1.15em; /* Slightly smaller than links but still larger */
+            padding: 8px 15px;
+            background-color: #4CAF50; /* A green color for the button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .nav-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
     </style>
 
-        <form action="home.php">
-        <button type="submit"style="
-                position: absolute; right: 20px; top: 10px;
+        
+</head>
+<body>
+   <nav>
+        <a href="home.php"style="
+                position: absolute; right: 20px; top: 23px;
                 font-size: 1.15em; /* Slightly smaller than links but still larger */
                 padding: 8px 15px;
                 background-color:rgb(178, 183, 178); /* A green color for the button */
@@ -124,14 +144,24 @@ $other_result = $all_stmt->get_result();
                 border: none;
                 border-radius: 5px;
                 cursor: pointer;
-                transition: background-color 0.3s ease;"
-                >返回主頁</button>
-    </form>
-</head>
-<body>
+                transition: background-color 0.3s ease;
+                text-decoration: none;"
+                >返回首頁</a>
+        <a href="create_post.php" style ="
+                position: absolute; right: 128px; top: 23px;
+                font-size: 1.15em; /* Slightly smaller than links but still larger */
+                padding: 8px 15px;
+                background-color: #4CAF50; /* A green color for the button */
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                text-decoration: none;"
+                >建立貼文</a>
+    </nav>
     <h1>貼文牆</h1>
 
-    <a href="create_post.php"><button>建立貼文</button></a>
 
     <?php display_flash_message(); ?>
 
