@@ -23,7 +23,7 @@ CREATE TABLE tracks_features (
     time_signature FLOAT,
     `year` INT,
     release_date TEXT
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `tracks_features` VALUES ('7lmeHLHBe4nmXzuXc0HDjk', 'Testify', 'The Battle Of Los Angeles', '2eia0myWFgoHuttJytCxgX', '[''Rage Against The Machine'']', '[''2d0hyoQ5ynDBnkvAbJKORj'']', 1, 1, False, 0.47, 0.978, 7, -5.399, 1, 0.0727, 0.0261, 1.09e-05, 0.356, 0.503, 117.906, 210133, 4.0, 1999, '1999-11-02');
 INSERT INTO `tracks_features` VALUES ('1wsRitfRRtWyEapl0q22o8', 'Guerrilla Radio', 'The Battle Of Los Angeles', '2eia0myWFgoHuttJytCxgX', '[''Rage Against The Machine'']', '[''2d0hyoQ5ynDBnkvAbJKORj'']', 2, 1, True, 0.599, 0.957, 11, -5.763999999999999, 1, 0.188, 0.0129, 7.06e-05, 0.155, 0.489, 103.68, 206200, 4.0, 1999, '1999-11-02');
