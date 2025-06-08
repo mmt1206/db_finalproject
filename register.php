@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border: 1px solid #ccc;
             border-radius: 8px;
         }
-        select {
+         select {
             height: 42px; /* match input height */
             width: 100%;
             background-color: white; /* optional: make it look consistent */
@@ -205,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
         
         <form action = "home.php">
-            <button type="submit" class="btn-home">🔙 返回主頁</button>
+            <button type="home.php" class="btn-home">🔙 返回主頁</button>
         </form>
         
         <form action = "user_list.php">
