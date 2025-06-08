@@ -133,7 +133,15 @@ $result = $stmt->get_result();
    
     <form action="logout.php" method="POST" style="display:inline;">
             <button type="submit"style="
-                position: absolute; right: 20px; top: 31px;"
+                position: absolute; right: 20px; top: 23px;
+                font-size: 1.15em; 
+                padding: 8px 15px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;"
             >登出</button>
     </form>
    
