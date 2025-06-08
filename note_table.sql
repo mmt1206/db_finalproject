@@ -28,7 +28,7 @@ CREATE TABLE playlist_tracks (
     playlist_id INT NOT NULL,
     track_id VARCHAR(22) NOT NULL,
     order_num INT NOT NULL,
-    PRIMARY KEY (playlist_id, order_num) ON DELETE CASCADE,
+    PRIMARY KEY (playlist_id, order_num),
     FOREIGN KEY (playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE,
     FOREIGN KEY (track_id) REFERENCES tracks_features(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
