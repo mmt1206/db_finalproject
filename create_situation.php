@@ -142,8 +142,8 @@ require 'flash.php';
                 <label>
                     <span class="label-title">Danceability：</span>
                     <div class="range-group">
-                        <input type="number" step="0.01" name="danceability_min" min="0.066" max="0.909" placeholder="Min">
-                        <input type="number" step="0.01" name="danceability_max" min="0.066" max="0.909" placeholder="Max">
+                        <input type="number" step="any" name="danceability_min" min="0.066" max="0.909" placeholder="Min">
+                        <input type="number" step="any" name="danceability_max" min="0.066" max="0.909" placeholder="Max">
                     </div>
                     <span class="note">範圍：0.066 ~ 0.909</span>
                 </label>
@@ -151,8 +151,8 @@ require 'flash.php';
                 <label>
                     <span class="label-title">Energy：</span>
                     <div class="range-group">
-                        <input type="number" step="0.01" name="energy_min" min="0.007" max="0.998" placeholder="Min">
-                        <input type="number" step="0.01" name="energy_max" min="0.007" max="0.998" placeholder="Max">
+                        <input type="number" step="any" name="energy_min" min="0.007" max="0.998" placeholder="Min">
+                        <input type="number" step="any" name="energy_max" min="0.007" max="0.998" placeholder="Max">
                     </div>
                     <span class="note">範圍：0.007 ~ 0.998</span>
                 </label>
@@ -160,8 +160,8 @@ require 'flash.php';
                 <label>
                     <span class="label-title">Loudness：</span>
                     <div class="range-group">
-                        <input type="number" step="0.1" name="loudness_min" min="-35.316" max="-2.584" placeholder="Min">
-                        <input type="number" step="0.1" name="loudness_max" min="-35.316" max="-2.584" placeholder="Max">
+                        <input type="number" step="any" name="loudness_min" min="-35.316" max="-2.584" placeholder="Min">
+                        <input type="number" step="any" name="loudness_max" min="-35.316" max="-2.584" placeholder="Max">
                     </div>
                     <span class="note">範圍：-35.316 ~ -2.584</span>
                 </label>
@@ -169,8 +169,8 @@ require 'flash.php';
                 <label>
                     <span class="label-title">Valence（快樂感）：</span>
                     <div class="range-group">
-                        <input type="number" step="0.01" name="valence_min" min="0.026" max="0.974" placeholder="Min">
-                        <input type="number" step="0.01" name="valence_max" min="0.026" max="0.974" placeholder="Max">
+                        <input type="number" step="any" name="valence_min" min="0.026" max="0.974" placeholder="Min">
+                        <input type="number" step="any" name="valence_max" min="0.026" max="0.974" placeholder="Max">
                     </div>
                     <span class="note">範圍：0.026 ~ 0.974</span>
                 </label>
@@ -178,8 +178,8 @@ require 'flash.php';
                 <label>
                     <span class="label-title">Tempo（節奏）：</span>
                     <div class="range-group">
-                        <input type="number" step="0.1" name="tempo_min" min="49.179" max="207.329" placeholder="Min">
-                        <input type="number" step="0.1" name="tempo_max" min="49.179" max="207.329" placeholder="Max">
+                        <input type="number" step="any" name="tempo_min" min="49.179" max="207.329" placeholder="Min">
+                        <input type="number" step="any" name="tempo_max" min="49.179" max="207.329" placeholder="Max">
                     </div>
                     <span class="note">範圍：49.179 ~ 207.329 BPM</span>
                 </label>
