@@ -7,6 +7,15 @@ if (!$user) {
     exit();
 }
 
+function getUserTypeLabel($type) {
+    switch ($type) {
+        case 'listener': return '聽眾';
+        case 'creator': return '創作者';
+        case 'manager': return '管理者';
+        default: return '未知角色';
+    }
+}
+
 $msg = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
@@ -154,12 +163,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
             </label>
 
-            <label>
-                使用者類型：
-                <?php ?>
-                    <input type="text" value="<?= htmlspecialchars($user['user_type']) ?>" disabled>
+           <label>
+            使用者類型：
+                    <input type="text" value="<?= htmlspecialchars(getUserTypeLabel($user['user_type'])) ?>" disabled>
                     <input type="hidden" name="user_type" value="<?= htmlspecialchars($user['user_type']) ?>">
-                <?php ?>
             </label>
 
             <button type="submit">💾 儲存</button>
