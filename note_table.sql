@@ -13,7 +13,7 @@ CREATE TABLE post (
     content TEXT,
 
     post_person INT(11),
-    FOREIGN KEY (post_person) REFERENCES users(user_id)
+    FOREIGN KEY (post_person) REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE playlists (
@@ -21,16 +21,16 @@ CREATE TABLE playlists (
     owner_id INT NOT NULL,
     playlist_name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (owner_id) REFERENCES users(user_id)
+    FOREIGN KEY (owner_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE playlist_tracks (
     playlist_id INT NOT NULL,
     track_id VARCHAR(22) NOT NULL,
     order_num INT NOT NULL,
-    PRIMARY KEY (playlist_id, order_num),
+    PRIMARY KEY (playlist_id, order_num) ON DELETE CASCADE,
     FOREIGN KEY (playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE,
-    FOREIGN KEY (track_id) REFERENCES tracks_features(id)
+    FOREIGN KEY (track_id) REFERENCES tracks_features(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE req_situation (
@@ -57,5 +57,5 @@ CREATE TABLE req_situation (
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (owner_id) REFERENCES users(user_id)
+    FOREIGN KEY (owner_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
